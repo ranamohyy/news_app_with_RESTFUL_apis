@@ -17,4 +17,9 @@ class AppStyles {
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
+  static final textStyle14Blue = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: Color(0xff0E0AB1),
+  );
 }
