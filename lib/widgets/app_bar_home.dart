@@ -1,12 +1,15 @@
 part of 'package:news_app/home/view.dart';
 
 class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarHomeWidget({
-    super.key,
-  });
+  const AppBarHomeWidget({super.key, required this.widget});
+  final Widget widget;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: widget,
+      ),
       backgroundColor: Color(0xffE9EEFA),
       title: Text(
         "Explore",
@@ -26,5 +29,5 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(65.h);
+  Size get preferredSize => Size.fromHeight(100.h);
 }
