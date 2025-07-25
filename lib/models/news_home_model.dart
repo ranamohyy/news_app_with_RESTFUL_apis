@@ -6,10 +6,10 @@ class NewsHomeModel {
   factory NewsHomeModel.fromJson(Map<String, dynamic> json) => NewsHomeModel(
         status: json["status"],
         totalResults: json["totalResults"],
-        articles: json["articles"] == null
-            ? []
-            : List<Articles>.from(
-                json["articles"]!.map((x) => Articles.fromJson(x))),
+        articles: (json["articles"] as List<dynamic>?)
+                ?.map((x) => Articles.fromJson(x))
+                .toList() ??
+            [],
       );
   Map<String, dynamic> toJson() => {
         "status": status,
@@ -57,9 +57,9 @@ class Articles {
 }
 
 class Source {
-  String id;
-  String name;
-  Source({required this.id, required this.name});
+  String? id;
+  String? name;
+  Source({this.id, this.name});
   factory Source.fromJson(Map<String, dynamic> json) => Source(
         id: json["id"],
         name: json["name"],
