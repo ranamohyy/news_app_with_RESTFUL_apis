@@ -3,21 +3,34 @@ part of 'package:news_app/home/view.dart';
 class TopHomeViewWidget extends StatelessWidget {
   const TopHomeViewWidget({
     super.key,
+    required this.title,
+    required this.date,
+    required this.image,
   });
+  final String title;
+  final String date;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Image.asset(AppAssets.ballon),
+      Image.network(image,
+          loadingBuilder: (context, child, loadingProgress) => Container(
+                height: 150.h,
+                width: double.infinity,
+                color: Colors.grey.shade400,
+              ),
+          errorBuilder: (context, error, stackTrace) {
+            return Image.asset(AppAssets.ballon);
+          }),
       SizedBox(
         height: 10,
       ),
-      Text("Apple Unveils Revolutionary AI Features ",
-          style: AppStyles.textStyle15),
+      Text(title, style: AppStyles.textStyle15),
       SizedBox(
         height: 5.h,
       ),
-      Text("May 1, 2025", style: AppStyles.textStyle12Grey),
+      Text(date, style: AppStyles.textStyle12Grey),
     ]);
   }
 }
