@@ -1,4 +1,4 @@
 class EndPoints {
   static const String homeEndPoint = 'top-headlines';
-  static const String searchEndPoint = 'v2/everything';
+  static const String searchEndPoint = 'everything';
 }
