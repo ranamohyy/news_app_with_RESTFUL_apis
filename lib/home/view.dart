@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/core/assets.dart';
+import 'package:news_app/core/navigator/app_nav.dart';
 import 'package:news_app/core/network_services/home_services.dart';
 import 'package:news_app/core/styles.dart';
 import 'package:news_app/models/news_home_model.dart';
@@ -37,6 +39,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     onTap: () {
                       setState(() {
                         selectedIndex = index;
+                        context.push(AppRoutes.searchResults,
+                            extra: titles[index]);
                       });
                     },
                     index: index,
