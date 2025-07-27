@@ -24,7 +24,8 @@ class ItemTypesOfSrevicesWidget extends StatelessWidget {
           width: 120.w,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(23.r),
-              color: selectedIndex == index ? Color(0xffE9EEFA) : Colors.white,
+              color: Colors.white,
+              // selectedIndex == index ? Colors.grey.shade300 : Colors.white,
               border: Border.all(width: 1, color: Colors.grey.shade300)),
           child: Text(
             titles,

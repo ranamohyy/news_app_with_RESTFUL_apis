@@ -37,11 +37,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: ItemTypesOfSrevicesWidget(
                     onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                        context.push(AppRoutes.searchResults,
-                            extra: titles[index]);
-                      });
+                      context.push(AppRoutes.searchResults,
+                          extra: titles[index]);
                     },
                     index: index,
                     selectedIndex: selectedIndex,
