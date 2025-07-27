@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:news_app/core/navigator/app_nav.dart';
 import 'package:news_app/core/styles.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -21,6 +23,12 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                   flex: 4,
                   child: TextFormField(
+                    onFieldSubmitted: (value) {
+                      context.push(
+                        AppRoutes.searchResults,
+                        extra: value,
+                      );
+                    },
                     decoration: InputDecoration(
                       disabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -42,11 +50,15 @@ class SearchScreen extends StatelessWidget {
                     ),
                   )),
               Expanded(
-                  flex: 1,
-                  child: Text(
-                    "Cancel",
-                    style: AppStyles.textStyle14Blue,
-                  ))
+                  flex: 0,
+                  child: TextButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: AppStyles.textStyle14Blue,
+                      )))
             ]),
           ],
         ),
