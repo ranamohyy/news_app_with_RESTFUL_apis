@@ -17,13 +17,17 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.search,
-            color: Colors.black,
-            size: 25.sp,
-          ),
-        )
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                context.push(AppRoutes.search);
+              },
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+                size: 25.sp,
+              ),
+            ))
       ],
     );
   }
