@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/core/network_services/home_services.dart';
 import 'package:news_app/home/view.dart';
 import 'package:news_app/models/news_home_model.dart';
 
 class SearchResultsScreen extends StatefulWidget {
-  const SearchResultsScreen({super.key});
+  const SearchResultsScreen({super.key, required this.query});
+  final String query;
   @override
   State<SearchResultsScreen> createState() => _HomePageScreenState();
 }
 
 class _HomePageScreenState extends State<SearchResultsScreen> {
-  final Future<dynamic> newsHomeModel = HomeServices().getHomeData();
+  // final Future<dynamic> newsHomeModel =
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            context.pop();
+          },
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text("Search Results"),
         centerTitle: true,
       ),
       body: FutureBuilder(
-          future: newsHomeModel,
+          future: HomeServices().getSearchData(widget.query),
           builder: (context, snapshot) {
             final wait = snapshot.connectionState == ConnectionState.waiting;
             if (wait) {
