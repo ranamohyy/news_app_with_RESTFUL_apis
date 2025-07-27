@@ -20,4 +20,21 @@ class HomeServices {
       return Future.error(e.toString());
     }
   }
+
+  getSearchData(String query) async {
+    try {
+      final response =
+          await DioHelper.getData(EndPoints.searchEndPoint, query: {
+        'q': query,
+        'apiKey': AppConstans.apiKey,
+      });
+      if (response.statusCode == 200) {
+        NewsHomeModel newsHomeModel = NewsHomeModel.fromJson(response.data);
+        return newsHomeModel;
+      }
+    } catch (e) {
+      log(e.toString());
+      return Future.error(e.toString());
+    }
+  }
 }
