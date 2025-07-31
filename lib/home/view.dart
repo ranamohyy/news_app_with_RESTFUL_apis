@@ -78,14 +78,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       Expanded(
                         flex: wait ? 1 : 0,
                         child: TopHomeViewWidget(
-                            image: data.articles![0].urlToImage ??
-                                "https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg",
-                            title: data.articles![0].title ??
-                                "Apple Unveils Revolutionary AI Features",
-                            date: DateFormat('yyy:MM:dd-kk:mm')
-                                .format(DateTime.parse(
-                              data.articles![0].publishedAt ?? "",
-                            ))),
+                          image: data.articles![1].urlToImage ?? "",
+                          title: data.articles![0].title ??
+                              "Apple Unveils Revolutionary AI Features",
+                          date:
+                              "${data.articles![0].author} - ${DateFormat('yyy:MM:dd').format(DateTime.parse(data.articles![0].publishedAt ?? ""))}",
+                        ),
                       ),
                       Expanded(
                         flex: 1,
@@ -93,15 +91,21 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           itemCount: data.articles!.length - 1,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
-                            child: TravelItemWidget(
-                              image: data.articles![index + 1].urlToImage ??
-                                  "https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg",
-                              title: data.articles![index + 1].title ??
-                                  "Apple Unveils Revolutionary AI Features",
-                              date: DateFormat('yyy:MM:dd-kk:mm')
-                                  .format(DateTime.parse(
-                                data.articles![index + 1].publishedAt ?? "",
-                              )),
+                            child: GestureDetector(
+                              onTap: () {
+                                context.push(AppRoutes.itemDetails,
+                                    extra: data.articles![index + 1]);
+                              },
+                              child: TravelItemWidget(
+                                image: data.articles![index + 1].urlToImage ??
+                                    "https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg",
+                                title: data.articles![index + 1].title ??
+                                    "Apple Unveils Revolutionary AI Features",
+                                date: DateFormat('yyy:MM:dd-kk:mm')
+                                    .format(DateTime.parse(
+                                  data.articles![index + 1].publishedAt ?? "",
+                                )),
+                              ),
                             ),
                           ),
                         ),
