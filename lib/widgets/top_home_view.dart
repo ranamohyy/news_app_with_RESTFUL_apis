@@ -14,15 +14,9 @@ class TopHomeViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Image.network(image,
-          loadingBuilder: (context, child, loadingProgress) => Container(
-                height: 150.h,
-                width: double.infinity,
-                color: Colors.grey.shade400,
-              ),
-          errorBuilder: (context, error, stackTrace) {
-            return Image.asset(AppAssets.ballon);
-          }),
+      Image.network(image, errorBuilder: (context, error, stackTrace) {
+        return Image.asset(AppAssets.ballon);
+      }),
       SizedBox(
         height: 10,
       ),

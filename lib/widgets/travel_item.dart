@@ -37,9 +37,6 @@ class TravelItemWidget extends StatelessWidget {
         Expanded(
             child: Image.network(
           image,
-          loadingBuilder: (context, child, loadingProgress) => Container(
-            color: Colors.grey.shade400,
-          ),
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(AppAssets.ballon);
           },
