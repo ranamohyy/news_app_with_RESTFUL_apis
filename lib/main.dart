@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/navigator/app_nav.dart';
 import 'package:news_app/core/network_services/dio_helper.dart';
-import 'package:news_app/home/view.dart';
-import 'package:news_app/search/view.dart';
-import 'package:news_app/search_results/view.dart';
 
 void main() {
   DioHelper.init();
@@ -30,7 +27,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
       ),
-      // child: HomePageScreen(),
     );
   }
 }
