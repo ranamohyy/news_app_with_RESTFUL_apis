@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/controller/home_cubit.dart';
 import 'package:news_app/core/assets.dart';
 import 'package:news_app/core/navigator/app_nav.dart';
 import 'package:news_app/core/network_services/home_services.dart';
@@ -24,7 +26,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
   final Future<dynamic> newsHomeModel = HomeServices().getHomeData();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider(
+  create: (context) =>HomeCubit()..getNewsData(),
+  child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarHomeWidget(
         widget: SizedBox(
@@ -48,22 +52,21 @@ class _HomePageScreenState extends State<HomePageScreen> {
           ),
         ),
       ),
-      body: FutureBuilder(
-          future: newsHomeModel,
-          builder: (context, snapshot) {
-            final wait = snapshot.connectionState == ConnectionState.waiting;
+      body: BlocBuilder<HomeCubit,HomeState>(
+          builder: (context, state) {
+            final wait = state is HomeLoading;
             if (wait) {
               return Center(
                   child: CircularProgressIndicator(
                 color: Colors.black,
               ));
             }
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
+            if (state is HomeFailure) {
+              return Center(child: Text(state.error.toString()));
             }
-            if (snapshot.hasData) {
-              NewsHomeModel data = snapshot.data as NewsHomeModel;
-              if (snapshot.data == null || data.totalResults == 0) {
+            if (state is HomeSuccess) {
+              NewsHomeModel data = state.model ;
+              if (data.articles == null || data.totalResults == 0) {
                 return Center(child: Text("No Data"));
               }
               return Padding(
@@ -115,6 +118,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
             }
             return Center(child: Text("No Data"));
           }),
-    );
+    ),
+);
   }
 }
